@@ -1,0 +1,12 @@
+---
+title: "Project1"
+author: "Minzi Kang, Yanrong Wang, Ken Deng"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
