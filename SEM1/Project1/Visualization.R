@@ -44,21 +44,39 @@ booknames <- lapply(seq_along(booknames), function(i) {
     gsub("^[^_]*_", "", booknames[[i]])
   }
 })
-print(booknames)
-demo2<-demo$features[[9]]
-for (i in 1:length(demo$features)){
-  y<-demo$features[[i]]
-  y<-rbind(y,demo2)
-  for (i in 1:nrow(y)){
-    y[i,]<-y[i,]/sum(y[i,])
-  }
-  for(j in i:ncol(y)){
-    y[,j]<-(y[,j]-mean(y[,j]))/sd(y[,j])
-  }
-  d<-dist(y)
-  pts<-cmdscale(d)
-  plot(pts,type="n")
-  title(main="Multidimensional Scaling Plot Forand Frankenstein")
-  text(pts[,1],pts[,2],label=bookname[[i]],cex=0.8)
-  
+
+
+##Percy and Frankenstein
+z<-demo$features[[6]]
+z<-rbind(z,demo$features[[7]],demo$features[[9]])
+bookname<-c(booknames[[6]],booknames[[7]],booknames[[9]])
+for (i in 1:nrow(z)){
+  z[i,]<-z[i,]/sum(z[i,])
 }
+for(j in i:ncol(z)){
+  z[,j]<-(z[,j]-mean(z[,j]))/sd(z[,j])
+}
+d<-dist(z)
+pts<-cmdscale(d)
+plot(pts,type="n")
+title(main="Multidimensional Scaling Plot For PercyShelly and Frankenstein")
+text(pts[,1],pts[,2],label=bookname,cex=0.8)
+
+##Mary,Percy and Frankenstein
+z<-demo$features[[4]]
+z<-rbind(z,demo$features[[6]],demo$features[[7]],demo$features[[9]])
+booknames <- demo$booknames
+booknames <- lapply(booknames, function(x) gsub(".txt", "", x))
+bookname<-c(booknames[[4]],booknames[[6]],booknames[[7]],booknames[[9]])
+for (i in 1:nrow(z)){
+  z[i,]<-z[i,]/sum(z[i,])
+}
+for(j in i:ncol(z)){
+  z[,j]<-(z[,j]-mean(z[,j]))/sd(z[,j])
+}
+d<-dist(z)
+pts<-cmdscale(d)
+plot(pts,type="n")
+title(main="Multidimensional Scaling Plot For PercyShelly,MaryShelly and Frankenstein")
+text(pts[,1],pts[,2],label=bookname,cex=0.8)
+
