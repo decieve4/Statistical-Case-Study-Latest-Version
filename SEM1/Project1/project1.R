@@ -1,1 +1,0 @@
-demo <- loadCorpus("./SEM1/Project1/Data/frankenstein/FunctionWords/", featureset = "frequentwords70")
