@@ -53,9 +53,7 @@ authorname -> numbers
 ## Visualization
 
 1. 跑slides5的code
-
 2. cluster
-3. 
 
 
 
