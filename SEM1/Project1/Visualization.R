@@ -64,10 +64,10 @@ text(pts[,1],pts[,2],label=bookname,cex=0.8)
 
 ##Mary,Percy and Frankenstein
 z<-demo$features[[4]]
-z<-rbind(z,demo$features[[6]],demo$features[[7]],demo$features[[9]])
+z<-rbind(z,demo$features[[6]],demo$features[[9]],demo$features[[10]],demo$features[[11]])
 booknames <- demo$booknames
 booknames <- lapply(booknames, function(x) gsub(".txt", "", x))
-bookname<-c(booknames[[4]],booknames[[6]],booknames[[7]],booknames[[9]])
+bookname<-c(booknames[[4]],booknames[[6]],booknames[[9]],booknames[[10]],booknames[[11]])
 for (i in 1:nrow(z)){
   z[i,]<-z[i,]/sum(z[i,])
 }
@@ -77,6 +77,6 @@ for(j in i:ncol(z)){
 d<-dist(z)
 pts<-cmdscale(d)
 plot(pts,type="n")
-title(main="Multidimensional Scaling Plot For PercyShelly,MaryShelly and Frankenstein")
+title(main="Multidimensional Scaling Plot For PercyShelly,MaryShelly,WalterScott,WilliamGodwin and Frankenstein")
 text(pts[,1],pts[,2],label=bookname,cex=0.8)
 
