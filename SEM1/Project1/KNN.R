@@ -53,6 +53,7 @@ DApredictions <- factor(DApredictions, levels = levels(truth))
 
 # 同样处理 KNNpredictions
 KNNpredictions <- factor(KNNpredictions, levels = levels(truth))
+sum(DApredictions==truth)/length(truth)
 
 # 打印交叉验证的结果
 cat("Discriminant Analysis (DA) Accuracy: ", sum(DApredictions==truth)/length(truth), "\n")
