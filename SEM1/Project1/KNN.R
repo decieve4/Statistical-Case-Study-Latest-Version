@@ -26,14 +26,11 @@ for (i in 1:length(traindata)) {
   traindata[[i]] <- traindata[[i]][-testind, , drop=FALSE]
 }
 
-
 # 初始化变量
-predictions <- NULL
+DApredictions <- NULL
 KNNpredictions <- NULL
 truth <- NULL
 features <- corpus$features
-
-
 
 # 交叉验证循环
 for (i in 1:length(features)) {
@@ -53,7 +50,7 @@ for (i in 1:length(features)) {
     # 使用 discriminantCorpus 进行分类
     
     pred <- discriminantCorpus(traindata, testdata)
-    predictions <- c(predictions, pred)  # 将预测结果追加到 predictions
+    DApredictions <- c(DApredictions, pred)  # 将预测结果追加到 predictions
     
     # 使用 KNNCorpus 进行 KNN 分类
     
@@ -66,10 +63,23 @@ for (i in 1:length(features)) {
   }
 }
 
-sum(predictions==truth)/length(truth)
+#####
+
+cat("DA Accuracy: ", '\n')
+sum(DApredictions==truth)/length(truth)
 
 sum(KNNpredictions==truth)/length(truth)
 
-confusionMatrix(as.factor(predictions), as.factor(truth))
+confusionMatrix(as.factor(DApredictions), as.factor(truth))
+
+confusionMatrix(as.factor(KNNpredictions), as.factor(truth))
+
+#####
+
+#####
+
+
+
+#####
 
 
