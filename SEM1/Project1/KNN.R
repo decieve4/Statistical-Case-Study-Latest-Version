@@ -8,78 +8,64 @@ corpus <- loadCorpus("./SEM1/Project1/Data/frankenstein/FunctionWords/", feature
 features <- corpus$features
 authornames <- corpus$authornames
 
-# 初始化训练数据、测试数据和测试标签
-traindata <- corpus$features
-testdata <- NULL
-testlabels <- NULL  # 测试集的真实作者标签
-
-# 为每个作者选择一个随机的书本作为测试集
-for (i in 1:length(traindata)) {
-  # 随机选择一个书本（对应一行数据）
-  testind <- sample(1:nrow(traindata[[i]]), 1)
-  
-  # 将选择的书本添加到测试集
-  testdata <- rbind(testdata, traindata[[i]][testind, ])
-  testlabels <- c(testlabels, i)
-  
-  # 将该书本从训练集中移除
-  traindata[[i]] <- traindata[[i]][-testind, , drop=FALSE]
-}
+# 确保《Frankenstein》作为测试集，移除它的训练数据
+traindata <- corpus$features[-9]  # 移除第9个作家（Unknown - Frankenstein）
+testdata <- matrix(corpus$features[[9]], nrow=1)  # 将Frankenstein作为测试数据
+testlabels <- 9  # 将Unknown标记为第9个作家（Frankenstein）
 
 # 初始化变量
 DApredictions <- NULL
 KNNpredictions <- NULL
 truth <- NULL
-features <- corpus$features
 
-# 交叉验证循环
-for (i in 1:length(features)) {
-  for (j in 1:nrow(features[[i]])) {
+# 交叉验证循环（针对其他11位作家）
+for (i in 1:length(traindata)) {
+  for (j in 1:nrow(traindata[[i]])) {
     
     # 将当前行的特征作为测试数据
-    testdata <- matrix(features[[i]][j,], nrow=1)
+    cv_testdata <- matrix(traindata[[i]][j,], nrow=1)
     
-    # 将 features 复制为 traindata，并删除当前行的数据以避免泄漏
-    traindata <- features
-    traindata[[i]] <- traindata[[i]][-j, , drop=FALSE]
+    # 将 traindata 复制，删除当前行的数据以避免泄漏
+    cv_traindata <- traindata
+    cv_traindata[[i]] <- cv_traindata[[i]][-j, , drop=FALSE]
     
-    if (nrow(traindata[[i]]) == 0){
-      traindata <- traindata[-i]
+    # 防止traindata出现空集
+    if (nrow(cv_traindata[[i]]) == 0){
+      cv_traindata <- cv_traindata[-i]
     }
     
     # 使用 discriminantCorpus 进行分类
-    
-    pred <- discriminantCorpus(traindata, testdata)
-    DApredictions <- c(DApredictions, pred)  # 将预测结果追加到 predictions
+    DA_pred <- discriminantCorpus(cv_traindata, cv_testdata)
+    DApredictions <- c(DApredictions, DA_pred)  # 将预测结果追加到 predictions
     
     # 使用 KNNCorpus 进行 KNN 分类
-    
-    pred <- KNNCorpus(traindata, testdata)
-   
-    KNNpredictions <- c(KNNpredictions, pred)  # 将KNN预测结果追加到 KNNpredictions
+    KNN_pred <- KNNCorpus(cv_traindata, cv_testdata)
+    KNNpredictions <- c(KNNpredictions, KNN_pred)  # 将KNN预测结果追加到 KNNpredictions
     
     # 记录真实类别
     truth <- c(truth, i)
   }
 }
 
-#####
+# 确保 DApredictions 和 truth 的因子水平一致
+truth <- factor(truth, levels = sort(unique(truth)))
+DApredictions <- factor(DApredictions, levels = levels(truth))
 
-cat("DA Accuracy: ", '\n')
-sum(DApredictions==truth)/length(truth)
+# 同样处理 KNNpredictions
+KNNpredictions <- factor(KNNpredictions, levels = levels(truth))
 
-sum(KNNpredictions==truth)/length(truth)
+# 打印交叉验证的结果
+cat("Discriminant Analysis (DA) Accuracy: ", sum(DApredictions==truth)/length(truth), "\n")
+cat("KNN Accuracy: ", sum(KNNpredictions==truth)/length(truth), "\n")
 
-confusionMatrix(as.factor(DApredictions), as.factor(truth))
+# 混淆矩阵
+print(confusionMatrix(as.factor(DApredictions), as.factor(truth)))
+print(confusionMatrix(as.factor(KNNpredictions), as.factor(truth)))
 
-confusionMatrix(as.factor(KNNpredictions), as.factor(truth))
+# 将Frankenstein作为测试集进行分类
+DA_frankenstein_pred <- discriminantCorpus(traindata, testdata)
+KNN_frankenstein_pred <- KNNCorpus(traindata, testdata)
 
-#####
-
-#####
-
-
-
-#####
-
-
+# 打印《Frankenstein》的分类结果
+cat("Discriminant Analysis Prediction for Frankenstein: ", corpus$authornames[DA_frankenstein_pred], "\n")
+cat("KNN Prediction for Frankenstein: ", corpus$authornames[KNN_frankenstein_pred], "\n")
