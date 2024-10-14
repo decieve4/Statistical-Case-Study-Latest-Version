@@ -39,8 +39,6 @@ features <- corpus$features
 for (i in 1:length(features)) {
   for (j in 1:nrow(features[[i]])) {
     
-    cat("i: ", i, "j: ", j, "\n")
-    
     # 将当前行的特征作为测试数据
     testdata <- matrix(features[[i]][j,], nrow=1)
     
@@ -48,13 +46,9 @@ for (i in 1:length(features)) {
     traindata <- features
     traindata[[i]] <- traindata[[i]][-j, , drop=FALSE]
     
-    cat("nrow", nrow(traindata[[i]]), "\n")
-    
     if (nrow(traindata[[i]]) == 0){
       traindata <- traindata[-i]
     }
-    
-    cat("new traindata", length(traindata), "\n")
     
     # 使用 discriminantCorpus 进行分类
     
@@ -65,7 +59,6 @@ for (i in 1:length(features)) {
     
     pred <- KNNCorpus(traindata, testdata)
    
-    
     KNNpredictions <- c(KNNpredictions, pred)  # 将KNN预测结果追加到 KNNpredictions
     
     # 记录真实类别

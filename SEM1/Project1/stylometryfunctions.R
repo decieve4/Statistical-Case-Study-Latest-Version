@@ -13,7 +13,7 @@ loadCorpus <- function(filedir,featureset="functionwords",maxauthors=Inf) {
   count <- 0
   
   for (i in 1:length(authornames)) {
-    #print(i)
+    
     if (count >= maxauthors) {break}
     files <- list.files(sprintf("%s%s/",filedir,authornames[i]))
     if (length(files)==0) {next}
@@ -44,30 +44,20 @@ loadCorpus <- function(filedir,featureset="functionwords",maxauthors=Inf) {
 
 myKNN <- function(traindata, testdata, trainlabels, k=1) {
   
-  cat("traindata in myKNN input", "\n")
-  print(traindata[, 1:5])
-  
   if (mode(traindata) == 'numeric' && !is.matrix(traindata)) {
     traindata <- matrix(traindata,nrow=1)
   }
-  
-  cat("traindata after matrix", "\n")
-  print(traindata[, 1:5])
   
   if (mode(testdata) == 'numeric' && !is.matrix(testdata)) {
     testdata <- matrix(testdata,nrow=1)
   }
   
-  # error
   mus <- apply(traindata, 2, mean) 
   sigmas <- apply(traindata, 2, sd)
-  
-  cat("mus", mus, "\n", "sigmas: ", sigmas, "\n")
   
   for (i in 1:ncol(traindata)) {
     traindata[,i] <- (traindata[,i] - mus[i])/sigmas[i]
   }
-  # error end
   
   for (i in 1:ncol(testdata)) {
     testdata[,i] <- (testdata[,i]-mus[i])/sigmas[i]
@@ -105,21 +95,14 @@ discriminantCorpus <- function(traindata, testdata) {
 
 KNNCorpus <- function(traindata, testdata) {
   
-  cat("traindata in KNN Corpus: ", "\n")
-  print(length(traindata))
-  
   train <- NULL
   for (i in 1:length(traindata)) {
     train <- rbind(train, apply(traindata[[i]], 2, sum))
   }
   
-  cat("train in KNN Corpus: ", "\n")
-  
   for (i in 1:nrow(train)) {
     train[i,] <- train[i,]/sum(train[i,])
   }
-  
-  cat("train in KNN Corpus 2: ", "\n")
   
   for (i in 1:nrow(testdata)) {
     testdata[i,] <- testdata[i,]/sum(testdata[i,])
