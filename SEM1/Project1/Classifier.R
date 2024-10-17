@@ -1,5 +1,6 @@
 # 加载自定义函数
 source("./SEM1/Project1/stylometryfunctions.R")  # 调整路径
+library(randomForest)
 
 # 加载语料库
 corpus <- loadCorpus("./SEM1/Project1/Data/frankenstein/FunctionWords/", featureset = "frequentwords70")

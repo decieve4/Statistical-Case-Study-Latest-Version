@@ -26,9 +26,11 @@
 
 ## Summary
 
+results
+
+## Intro of stylometry [m]
 
 
-## Intro of function words...
 
 
 
@@ -40,28 +42,15 @@
 
 
 
-12 writer, 1-5 novels, 70 freq words
+## Intro [m]
+
+11writer, 1-5 novels, 70 freq words
 
 unknown, 70 freq words
 
 
 
-authorname -> numbers
-
-
-
-## Visualization
-
-1. 跑slides5的code
-2. cluster
-
-
-
-# Algorithm
-
-
-
-## KNN
+## Pre-processing [k]
 
 
 
@@ -69,25 +58,54 @@ authorname -> numbers
 
 
 
-## RandomForest
+## Visualisation
+
+### Cluster [k]
 
 
 
+???
 
 
 
+### MDS [w]
 
-## ???
+1. author
+2. books
 
-
-
-# Results
-
-> cross-validation
+> 跟mary sherlly比较近
 
 
 
+# Algorithm (def + explanation)
 
+
+
+## Metric [w]
+
+
+
+Accuracy
+
+Confusion Matrix
+
+
+
+## DA [m]
+
+效果不好
+
+## KNN [w]
+
+效果比较好，分到mary sherlly
+
+## RandomForest [k]
+
+效果不好
+
+
+
+# Result
 
 
 
@@ -96,6 +114,10 @@ authorname -> numbers
 
 
 ## Limit
+
+
+
+
 
 
 
