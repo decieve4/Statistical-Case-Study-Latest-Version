@@ -2,7 +2,7 @@
 
 
 
-1. Investigate whether stylometric methods from this course are able to accurately identify the authorship of the texts that have a known author (i.e. texts other than Frankenstein). This will demonstrate that these methods are accurate and reliable for studying 19th century English fiction.
+1. Investigate whether **stylometric methods** <u>from this course</u> are able to accurately identify the authorship of the texts that have a known author (i.e. texts other than Frankenstein). This will demonstrate that these methods are accurate and reliable for studying 19th century English fiction.
 2. Perform analysis to determine which of the supplied authors was most likely to have written Frankenstein (which is contained in the ‘Unknown’ folder).
 3. Create a report summarizing your findings. This should be have a maximum page length of 5 pages, not including any pictures.
 
@@ -26,9 +26,11 @@
 
 ## Summary
 
+results
+
+## Intro of stylometry [m]
 
 
-## Intro of function words...
 
 
 
@@ -40,28 +42,15 @@
 
 
 
-12 writer, 1-5 novels, 70 freq words
+## Intro [m]
+
+11writer, 1-5 novels, 70 freq words
 
 unknown, 70 freq words
 
 
 
-authorname -> numbers
-
-
-
-## Visualization
-
-1. 跑slides5的code
-2. cluster
-
-
-
-# Algorithm
-
-
-
-## KNN
+## Pre-processing [k]
 
 
 
@@ -69,25 +58,54 @@ authorname -> numbers
 
 
 
-## RandomForest
+## Visualisation
+
+### Cluster [k]
 
 
 
+???
 
 
 
+### MDS [w]
 
-## ???
+1. author
+2. books
 
-
-
-# Results
-
-> cross-validation
+> 跟mary sherlly比较近
 
 
 
+# stylometric methods Algorithm (def + explanation)
 
+
+
+## Metric [w]
+
+
+
+Accuracy
+
+Confusion Matrix
+
+
+
+## DA [m]
+
+效果不好
+
+## KNN [w]
+
+效果比较好，分到mary sherlly
+
+## RandomForest [k]
+
+效果不好
+
+
+
+# Result
 
 
 
@@ -96,6 +114,11 @@ authorname -> numbers
 
 
 ## Limit
+
+1. data clean
+2. cluster hyper params limits
+
+
 
 
 
