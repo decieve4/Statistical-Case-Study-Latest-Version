@@ -82,3 +82,4 @@ RF_frankenstein_pred <- randomForestCorpus(traindata, testdata)
 cat("Discriminant Analysis Prediction for Frankenstein: ", corpus$authornames[DA_frankenstein_pred], "\n")
 cat("KNN Prediction for Frankenstein: ", corpus$authornames[KNN_frankenstein_pred], "\n")
 cat("Random Forest Prediction for Frankenstein: ", corpus$authornames[RF_frankenstein_pred], "\n")
+
