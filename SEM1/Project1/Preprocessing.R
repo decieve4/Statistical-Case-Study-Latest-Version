@@ -66,3 +66,5 @@ num_components <- which(cumulative_variance >= 0.9)[1]
 # Extract the principal components that explain at least 80% of the variance
 X_pca <- pca_result$x[, 1:num_components]
 
+rm(pca_result)
+

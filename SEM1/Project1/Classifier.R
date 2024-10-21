@@ -1,5 +1,6 @@
 # 加载自定义函数
 source("./SEM1/Project1/stylometryfunctions.R")  # 调整路径
+source("SEM1/Project1/Preprocessing.R")
 library(randomForest)
 
 # 加载语料库
@@ -9,9 +10,30 @@ corpus <- loadCorpus("./SEM1/Project1/Data/frankenstein/FunctionWords/", feature
 features <- corpus$features
 authornames <- corpus$authornames
 
+# ### change features with clean data
+# # Cleaned matrix `X`, assumed to be the combined cleaned data
+# X_cleaned <- X  # Assuming `X` is already cleaned and ready for use
+# 
+# # Determine the original structure of `features` (number of rows for each author)
+# rows_per_author <- sapply(features, nrow)
+# 
+# # Split the cleaned matrix `X_cleaned` back into a list
+# new_features <- split(X_cleaned, rep(1:length(rows_per_author), rows_per_author))
+# 
+# # Ensure each element is correctly reshaped into a matrix
+# for (i in seq_along(new_features)) {
+#   new_features[[i]] <- matrix(new_features[[i]], nrow = rows_per_author[i], byrow = TRUE)
+# }
+# 
+# # Assign the new list back to `features`
+# features <- new_features
+# rm(new_features)
+# ###
+
 # 确保《Frankenstein》作为测试集，移除它的训练数据
-traindata <- corpus$features[-9]  # 移除第9个作家（Unknown - Frankenstein）
-testdata <- matrix(corpus$features[[9]], nrow=1)  # 将Frankenstein作为测试数据
+traindata <- features[-9]  # 移除第9个作家（Unknown - Frankenstein）
+authornames <- authornames[-9]
+testdata <- matrix(features[[9]], nrow=1)  # 将Frankenstein作为测试数据
 testlabels <- 9  # 将Unknown标记为第9个作家（Frankenstein）
 
 # 初始化变量
@@ -80,7 +102,7 @@ KNN_frankenstein_pred <- KNNCorpus(traindata, testdata)
 RF_frankenstein_pred <- randomForestCorpus(traindata, testdata)
 
 # 打印《Frankenstein》的分类结果
-cat("Discriminant Analysis Prediction for Frankenstein: ", corpus$authornames[DA_frankenstein_pred], "\n")
-cat("KNN Prediction for Frankenstein: ", corpus$authornames[KNN_frankenstein_pred], "\n")
-cat("Random Forest Prediction for Frankenstein: ", corpus$authornames[RF_frankenstein_pred], "\n")
+cat("Discriminant Analysis Prediction for Frankenstein: ", DA_frankenstein_pred, authornames[DA_frankenstein_pred], "\n")
+cat("KNN Prediction for Frankenstein: ", KNN_frankenstein_pred, authornames[KNN_frankenstein_pred], "\n")
+cat("Random Forest Prediction for Frankenstein: ", RF_frankenstein_pred, authornames[RF_frankenstein_pred], "\n")
 
