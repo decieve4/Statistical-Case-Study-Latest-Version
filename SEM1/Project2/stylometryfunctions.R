@@ -92,18 +92,23 @@ discriminantCorpus <- function(traindata, testdata) {
 
 
 KNNCorpus <- function(traindata, testdata) {
+  # traindata: (topic, num_books, num_fw)
   train <- NULL
   for (i in 1:length(traindata)) {
     train <- rbind(train, apply(traindata[[i]],2,sum))
   }
-  
+  # train: (num_books, num_fw)
   for (i in 1:nrow(train)) {
     train[i,] <- train[i,]/sum(train[i,])
   }
+  # testdata: (1, num_fw)
   for (i in 1:nrow(testdata)) {
     testdata[i,] <- testdata[i,]/sum(testdata[i,])
   }
+  
+  # labels
   trainlabels <- 1:nrow(train)
+  
   myKNN(train, testdata, trainlabels,k=1)
 }
 
