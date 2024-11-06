@@ -10,20 +10,23 @@ GPTM <- loadCorpus("SEM1/Project2/functionwords/functionwords/GPTfunctionwords/"
 humanfeatures <- humanM$features
 GPTfeatures <- GPTM$features
 # 1.3 change list to big matrix
-
+humanfeatures.mat <- do.call(rbind, humanfeatures)
+GPTfeatures.mat <- do.call(rbind, GPTfeatures)
 # 1.3* sample 5 topics
-
-# 1.4 combine human and GPT to be a list with index 1 and 2
-features <- c(humannfeatures, GPTfeatures)
+humanfeatures.mat <- humanfeatures.mat[1:100, ]
+GPTfeatures.mat <- GPTfeatures.mat[1:100, ]
+# 1.4 combine human and GPT to be a list with index 1 (human) and 2 (GPT)
+features <- list(humanfeatures.mat, GPTfeatures.mat)
 
 # 2. run classifier
+# 2.1 MAKE SURE TO USE CORRECT DATA
 traindata <- features
-
+# 2.2 init prediction list
 DApredictions <- NULL
 KNNpredictions <- NULL
 RFpredictions <- NULL
 truth <- NULL
-
+# 2.3 start leave-one-out
 for (i in 1:length(traindata)) {
   for (j in 1:nrow(traindata[[i]])) {
     
@@ -46,7 +49,7 @@ for (i in 1:length(traindata)) {
     # 使用 KNNCorpus 进行 KNN 分类
     KNN_pred <- KNNCorpus(cv_traindata, cv_testdata)
     KNNpredictions <- c(KNNpredictions, KNN_pred)  # 将KNN预测结果追加到 KNNpredictions
-    
+
     # 使用 randomForestCorpus 进行分类
     RF_pred <- randomForestCorpus(cv_traindata, cv_testdata)
     RFpredictions <- c(RFpredictions, RF_pred)  # 将 Random Forest 预测结果追加到 RFpredictions
@@ -63,16 +66,16 @@ KNNpredictions <- factor(KNNpredictions, levels = levels(truth))
 RFpredictions <- factor(RFpredictions, levels = levels(truth))
 
 # 打印交叉验证的结果
-cat("Discriminant Analysis (DA) Accuracy: ", sum(DApredictions==truth)/length(truth), "\n")
-cat("KNN Accuracy: ", sum(KNNpredictions==truth)/length(truth), "\n")
-cat("Random Forest (RF) Accuracy: ", sum(RFpredictions==truth)/length(truth), "\n")
+message("Discriminant Analysis (DA) Accuracy: ", sum(DApredictions==truth)/length(truth))
+message("KNN Accuracy: ", sum(KNNpredictions==truth)/length(truth))
+message("Random Forest (RF) Accuracy: ", sum(RFpredictions==truth)/length(truth))
 
 # 混淆矩阵
-cat("Confusion Matrix for Discriminant Analysis: \n")
+message("Confusion Matrix for Discriminant Analysis:")
 print(confusionMatrix(as.factor(DApredictions), as.factor(truth)))
 
-cat("Confusion Matrix for KNN: \n")
+message("Confusion Matrix for KNN:")
 print(confusionMatrix(as.factor(KNNpredictions), as.factor(truth)))
 
-cat("Confusion Matrix for Random Forest: \n")
+message("Confusion Matrix for Random Forest:")
 print(confusionMatrix(as.factor(RFpredictions), as.factor(truth)))
