@@ -1,6 +1,4 @@
-source("SEM1/Project2/reducewords.R")
 source("SEM1/Project2/stylometryfunctions.R")
-library(randomForest)
 
 set.seed(42)
 
@@ -116,68 +114,6 @@ for (idx_fold in 1:num_folds){
   truth_label_fold <- ifelse(idx <= (num_text / 2), 1, 2)
   truth <- c(truth, truth_label_fold)
 }
-
-# for (i in 1:length(traindata)) { # i is idx_Human_or_GPT
-
-#   for (j in 1:nrow(traindata[[i]])) { # j is idx_fold
-
-#     
-
-#     # 将当前行的特征作为测试数据
-
-#     cv_testdata <- matrix(traindata[[i]][j,], nrow=1)
-
-#     
-
-#     # 将 traindata 复制，删除当前行的数据以避免泄漏
-
-#     cv_traindata <- traindata
-
-#     cv_traindata[[i]] <- cv_traindata[[i]][-j, , drop=FALSE]
-
-#     
-
-#     # 防止traindata出现空集
-
-#     if (nrow(cv_traindata[[i]]) == 0){
-
-#       cv_traindata <- cv_traindata[-i]
-
-#     }
-
-#     
-
-#     # 使用 discriminantCorpus 进行分类
-
-#     DA_pred <- discriminantCorpus(cv_traindata, cv_testdata)
-
-#     DApredictions <- c(DApredictions, DA_pred)  # 将预测结果追加到 predictions
-
-#     
-
-#     # 使用 KNNCorpus 进行 KNN 分类
-
-#     KNN_pred <- KNNCorpus(cv_traindata, cv_testdata)
-
-#     KNNpredictions <- c(KNNpredictions, KNN_pred)  # 将KNN预测结果追加到 KNNpredictions
-
-# 
-
-#     # 使用 randomForestCorpus 进行分类
-
-#     RF_pred <- randomForestCorpus(cv_traindata, cv_testdata)
-
-#     RFpredictions <- c(RFpredictions, RF_pred)  # 将 Random Forest 预测结果追加到 RFpredictions
-
-#     
-
-#     # true label
-
-#     truth <- c(truth, i)
-
-#   }
-
-# }
 
 end_time <- proc.time()
 message("Run Time:")

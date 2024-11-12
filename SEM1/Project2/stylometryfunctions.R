@@ -3,6 +3,7 @@
 
 library(class)
 library(caret)
+library(randomForest)
 
 #load in a literary corpus. Filedir should be the directory of the function words, which contains one folder for
 #each author. The 'featureset' argument denotes the type of features that should be used
