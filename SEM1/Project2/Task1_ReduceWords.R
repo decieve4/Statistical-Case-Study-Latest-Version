@@ -10,7 +10,7 @@ humanfeatures <- humanM$features
 GPTfeatures <- GPTM$features
 rhfeatures<-humanM$features[[1]]
 rgfeatures<-GPTM$features[[1]]
-numwords <- 500 #number of words to trim the test set down into
+numwords <- 1000 #number of words to trim the test set down into
 for(i in 2:length(humanM$features)){
   rhfeatures<-rbind(rhfeatures,humanM$features[[i]])
   rgfeatures<-rbind(rgfeatures,GPTM$features[[i]])
@@ -36,61 +36,102 @@ features <- list(humanfeatures.mat, GPTfeatures.mat)
 
 traindata <- features
 reducedtraindata<-reducedfeatures
+dataset <- features
+dataset.mat <- rbind(features[[1]], features[[2]])
+reduceddataset.mat <- rbind(reducedfeatures[[1]], reducedfeatures[[2]])
+num_text <- nrow(features[[1]]) + nrow(features[[2]])
+
 # 2.2 init prediction list
+
 DApredictions <- NULL
 KNNpredictions <- NULL
 RFpredictions <- NULL
 truth <- NULL
-# 2.3 start leave-one-out
-for (i in 1:length(traindata)) {
-  for (j in 1:nrow(traindata[[i]])) {
-    
-    # 将当前行的特征作为测试数据
-    cv_testdata <- matrix(reducedtraindata[[i]][j,], nrow=1)
-    
-    # 将 traindata 复制，删除当前行的数据以避免泄漏
-    cv_traindata <- traindata
-    cv_traindata[[i]] <- cv_traindata[[i]][-j, , drop=FALSE]
-    
-    # 防止traindata出现空集
-    if (nrow(cv_traindata[[i]]) == 0){
-      cv_traindata <- cv_traindata[-i]
-    }
-    
-    # 使用 discriminantCorpus 进行分类
-    DA_pred <- discriminantCorpus(cv_traindata, cv_testdata)
-    DApredictions <- c(DApredictions, DA_pred)  # 将预测结果追加到 predictions
-    
-    # 使用 KNNCorpus 进行 KNN 分类
-    KNN_pred <- KNNCorpus(cv_traindata, cv_testdata)
-    KNNpredictions <- c(KNNpredictions, KNN_pred)  # 将KNN预测结果追加到 KNNpredictions
-    
-    # 使用 randomForestCorpus 进行分类
-    RF_pred <- randomForestCorpus(cv_traindata, cv_testdata)
-    RFpredictions <- c(RFpredictions, RF_pred)  # 将 Random Forest 预测结果追加到 RFpredictions
-    
-    # 记录真实类别
-    truth <- c(truth, i)
-  }
+
+# 2.3 start leave-one-out or Cross-Validation
+
+# 2.3.1 try cross-validation, sample idx for each fold
+
+idx_total <- 1:num_text
+num_folds <- 5
+idx_folds <- vector("list", num_folds)
+for (i in 1:num_folds) {
+  idx_folds[[i]] <- sample(idx_total, size = as.integer(num_text / num_folds), replace = FALSE)
+  idx_total <- setdiff(idx_total, idx_folds[[i]])
 }
 
-# 确保 predictions 和 truth 的因子水平一致
+# 2.3.2 run algorithm
+
+for (idx_fold in 1:num_folds){
+  
+  # a. get idx
+  
+  idx <- idx_folds[[idx_fold]]
+  idx_human <- idx[idx <= (num_text / 2)]
+  idx_GPT <- idx[idx > (num_text / 2)] - (num_text / 2)
+  
+  # sample testdata
+  
+  cv_testdata <- reduceddataset.mat[idx, ]
+  
+  # the rest of data is train data
+  
+  cv_traindata <- dataset
+  
+  # human
+  
+  cv_traindata[[1]] <- cv_traindata[[1]][-idx_human, ]
+  
+  # GPT
+  
+  cv_traindata[[2]] <- cv_traindata[[2]][-idx_GPT, ]
+  
+  # 使用 discriminantCorpus 进行分类
+  
+  DA_pred <- discriminantCorpus(cv_traindata, cv_testdata)
+  DApredictions <- c(DApredictions, DA_pred)  # 将预测结果追加到 predictions
+  
+  # 使用 KNNCorpus 进行 KNN 分类
+  
+  KNN_pred <- KNNCorpus(cv_traindata, cv_testdata)
+  KNNpredictions <- c(KNNpredictions, KNN_pred)  # 将KNN预测结果追加到 KNNpredictions
+  
+  # 使用 randomForestCorpus 进行分类
+  
+  RF_pred <- randomForestCorpus(cv_traindata, cv_testdata)
+  RFpredictions <- c(RFpredictions, RF_pred)  # 将 Random Forest 预测结果追加到 RFpredictions
+  
+  # true label for this fold's testdata
+  
+  truth_label_fold <- ifelse(idx <= (num_text / 2), 1, 2)
+  truth <- c(truth, truth_label_fold)
+}
+
+
+
+# 3. inference and visualize results
+
+# 3.1 convert numeric -> factor
+
 truth <- factor(truth, levels = sort(unique(truth)))
 DApredictions <- factor(DApredictions, levels = levels(truth))
 KNNpredictions <- factor(KNNpredictions, levels = levels(truth))
 RFpredictions <- factor(RFpredictions, levels = levels(truth))
 
-# 打印交叉验证的结果
+# 3.2 sum bool factor
+
 message("Discriminant Analysis (DA) Accuracy: ", sum(DApredictions==truth)/length(truth))
 message("KNN Accuracy: ", sum(KNNpredictions==truth)/length(truth))
 message("Random Forest (RF) Accuracy: ", sum(RFpredictions==truth)/length(truth))
 
-# 混淆矩阵
+# 3.3 print 
+
 message("Confusion Matrix for Discriminant Analysis:")
-print(confusionMatrix(as.factor(DApredictions), as.factor(truth)))
+print(confusionMatrix(DApredictions, truth))
 
 message("Confusion Matrix for KNN:")
-print(confusionMatrix(as.factor(KNNpredictions), as.factor(truth)))
+print(confusionMatrix(KNNpredictions, truth))
 
 message("Confusion Matrix for Random Forest:")
-print(confusionMatrix(as.factor(RFpredictions), as.factor(truth)))
+print(confusionMatrix(RFpredictions, truth))
+
