@@ -113,3 +113,4 @@ for (current_topic in 1:num_topics) {
   print(confusionMatrix(RFpredictions, truth))
 }
 
+
