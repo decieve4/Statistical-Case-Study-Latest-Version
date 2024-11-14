@@ -112,5 +112,3 @@ for (current_topic in 1:num_topics) {
   message(sprintf("主题 %s 随机森林混淆矩阵:", topic_name))
   print(confusionMatrix(RFpredictions, truth))
 }
-
-
