@@ -19,16 +19,16 @@ for(i in 2:length(humanM$features)){
 
 reducedhumanfeatures <- reducewords(rhfeatures,numwords)
 reducedGPTfeatures <- reducewords(rgfeatures,numwords)
-reducedhumanfeatures.mat <- reducedhumanfeatures[1:100, ]
-reducedGPTfeatures.mat <- reducedGPTfeatures[1:100, ]
+reducedhumanfeatures.mat <- reducedhumanfeatures
+reducedGPTfeatures.mat <- reducedGPTfeatures
 reducedfeatures <- list(reducedhumanfeatures.mat, reducedGPTfeatures.mat)
 humanfeatures <- humanM$features#select the essays on this particular topic
 GPTfeatures <- GPTM$features
 humanfeatures.mat <- do.call(rbind, humanfeatures)
 GPTfeatures.mat <- do.call(rbind, GPTfeatures)
 # 1.3* sample 5 topics
-humanfeatures.mat <- humanfeatures.mat[1:100, ]
-GPTfeatures.mat <- GPTfeatures.mat[1:100, ]
+#humanfeatures.mat <- humanfeatures.mat[1:100, ]
+#GPTfeatures.mat <- GPTfeatures.mat[1:100, ]
 # 1.4 combine human and GPT to be a list with index 1 (human) and 2 (GPT)
 features <- list(humanfeatures.mat, GPTfeatures.mat)
 
@@ -134,4 +134,26 @@ print(confusionMatrix(KNNpredictions, truth))
 
 message("Confusion Matrix for Random Forest:")
 print(confusionMatrix(RFpredictions, truth))
+
+
+
+# 加载ggplot2库
+library(ggplot2)
+
+# 创建数据
+data <- data.frame(
+  x = c(0,50,200,500,1000,0,50,200,500,1000,0,50,200,500,1000),
+  y = c(0.9669, 0.8216, 0.9261, 0.957, 0.9646, 0.658, 0.5211, 0.5823, 0.6, 0.6012, 0.9995, 0.4999, 0.5084, 0.702, 0.8937),  # Y轴数据
+  group = rep(c("Discriminant Analysis", "KNN", "Random Forest"), each = 5)  # 分组标签
+)
+custom_ticks <- c(0, 50, 200, 500, 1000)
+# 绘制多条折线并添加注释
+ggplot(data, aes(x = x, y = y, color = group, group = group)) +
+  geom_line(size = 1) +                  # 绘制折线
+  geom_point(size = 2) +                 # 添加数据点
+  labs(title = "Reducewords", x = "Numwords", y = "Accuracy", color = "") +
+  scale_x_continuous(breaks = custom_ticks) +
+  theme_minimal() +                      # 美化主题
+  theme(legend.position = "top")         # 将图例放在顶部
+
 
