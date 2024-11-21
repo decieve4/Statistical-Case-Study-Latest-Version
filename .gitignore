@@ -2,3 +2,334 @@
 .Rhistory
 .RData
 .Ruserdata
+DA_confusion_matrix_Addiction.png
+DA_confusion_matrix_Ageing and death.png
+DA_confusion_matrix_Animals and humans.png
+DA_confusion_matrix_Anthropology.png
+DA_confusion_matrix_Archaeology.png
+DA_confusion_matrix_Architecture.png
+DA_confusion_matrix_Art.png
+DA_confusion_matrix_Astronomy.png
+DA_confusion_matrix_Automation and robotics.png
+DA_confusion_matrix_Beauty and aesthetics.png
+DA_confusion_matrix_Bioethics.png
+DA_confusion_matrix_Biography and memoir.png
+DA_confusion_matrix_Biology.png
+DA_confusion_matrix_Biotechnology.png
+DA_confusion_matrix_Chemistry.png
+DA_confusion_matrix_Childhood and adolescence.png
+DA_confusion_matrix_Cities.png
+DA_confusion_matrix_Cognition and intelligence.png
+DA_confusion_matrix_Comparative philosophy.png
+DA_confusion_matrix_Complexity.png
+DA_confusion_matrix_Computing and artificial intelligence.png
+DA_confusion_matrix_Consciousness and altered states.png
+DA_confusion_matrix_Cosmology.png
+DA_confusion_matrix_Cosmopolitanism.png
+DA_confusion_matrix_Dance and theatre.png
+DA_confusion_matrix_Death.png
+DA_confusion_matrix_Deep time.png
+DA_confusion_matrix_Demography and migration.png
+DA_confusion_matrix_Design and fashion.png
+DA_confusion_matrix_Earth science and climate.png
+DA_confusion_matrix_Ecology and environmental sciences.png
+DA_confusion_matrix_Economic history.png
+DA_confusion_matrix_Economics.png
+DA_confusion_matrix_Education.png
+DA_confusion_matrix_Engineering.png
+DA_confusion_matrix_Environmental history.png
+DA_confusion_matrix_Ethics.png
+DA_confusion_matrix_Evolution.png
+DA_confusion_matrix_Fairness and equality.png
+DA_confusion_matrix_Family life.png
+DA_confusion_matrix_Film and visual culture.png
+DA_confusion_matrix_Food and drink.png
+DA_confusion_matrix_Future of technology.png
+DA_confusion_matrix_Genetics.png
+DA_confusion_matrix_Global history.png
+DA_confusion_matrix_History of ideas.png
+DA_confusion_matrix_History of science.png
+DA_confusion_matrix_History of technology.png
+DA_confusion_matrix_History.png
+DA_confusion_matrix_Home.png
+DA_confusion_matrix_Human evolution.png
+DA_confusion_matrix_Human reproduction.png
+DA_confusion_matrix_Human rights and justice.png
+DA_confusion_matrix_Illness and disease.png
+DA_confusion_matrix_Information and communication.png
+DA_confusion_matrix_Knowledge.png
+DA_confusion_matrix_Language and linguistics.png
+DA_confusion_matrix_Life stages.png
+DA_confusion_matrix_Logic and probability.png
+DA_confusion_matrix_Love and friendship.png
+DA_confusion_matrix_Making.png
+DA_confusion_matrix_Mathematics.png
+DA_confusion_matrix_Meaning and the good life.png
+DA_confusion_matrix_Medicine.png
+DA_confusion_matrix_Mental health.png
+DA_confusion_matrix_Metaphysics.png
+DA_confusion_matrix_Mood and emotion.png
+DA_confusion_matrix_Music.png
+DA_confusion_matrix_Nations and empires.png
+DA_confusion_matrix_Nature and landscape.png
+DA_confusion_matrix_Neurodiversity.png
+DA_confusion_matrix_Neuroscience.png
+DA_confusion_matrix_Oceans and water.png
+DA_confusion_matrix_Palaeontology.png
+DA_confusion_matrix_Personality.png
+DA_confusion_matrix_Philosophy of language.png
+DA_confusion_matrix_Philosophy of mind.png
+DA_confusion_matrix_Philosophy of religion.png
+DA_confusion_matrix_Philosophy of science.png
+DA_confusion_matrix_Physics.png
+DA_confusion_matrix_Pleasure and pain.png
+DA_confusion_matrix_Political philosophy.png
+DA_confusion_matrix_Politics and government.png
+DA_confusion_matrix_Poverty and development.png
+DA_confusion_matrix_Progress and modernity.png
+DA_confusion_matrix_Psychiatry and psychotherapy.png
+DA_confusion_matrix_Public health.png
+DA_confusion_matrix_Quantum theory.png
+DA_confusion_matrix_Religion.png
+DA_confusion_matrix_Rituals and celebrations.png
+DA_confusion_matrix_Self-improvement.png
+DA_confusion_matrix_Sleep and dreams.png
+DA_confusion_matrix_Social psychology.png
+DA_confusion_matrix_Space exploration.png
+DA_confusion_matrix_Spirituality.png
+DA_confusion_matrix_Sports and games.png
+DA_confusion_matrix_Stories and literature.png
+DA_confusion_matrix_Subcultures.png
+DA_confusion_matrix_Teaching and learning.png
+DA_confusion_matrix_Technology and the self.png
+DA_confusion_matrix_The ancient world.png
+DA_confusion_matrix_The environment.png
+DA_confusion_matrix_The future.png
+DA_confusion_matrix_Thinkers and theories.png
+DA_confusion_matrix_Travel.png
+DA_confusion_matrix_Values and beliefs.png
+DA_confusion_matrix_Virtues and vices.png
+DA_confusion_matrix_War and peace.png
+DA_confusion_matrix_Wellbeing.png
+DA_confusion_matrix_Work.png
+KNN_confusion_matrix_Addiction.png
+KNN_confusion_matrix_Ageing and death.png
+KNN_confusion_matrix_Animals and humans.png
+KNN_confusion_matrix_Anthropology.png
+KNN_confusion_matrix_Archaeology.png
+KNN_confusion_matrix_Architecture.png
+KNN_confusion_matrix_Art.png
+KNN_confusion_matrix_Astronomy.png
+KNN_confusion_matrix_Automation and robotics.png
+KNN_confusion_matrix_Beauty and aesthetics.png
+KNN_confusion_matrix_Bioethics.png
+KNN_confusion_matrix_Biography and memoir.png
+KNN_confusion_matrix_Biology.png
+KNN_confusion_matrix_Biotechnology.png
+KNN_confusion_matrix_Chemistry.png
+KNN_confusion_matrix_Childhood and adolescence.png
+KNN_confusion_matrix_Cities.png
+KNN_confusion_matrix_Cognition and intelligence.png
+KNN_confusion_matrix_Comparative philosophy.png
+KNN_confusion_matrix_Complexity.png
+KNN_confusion_matrix_Computing and artificial intelligence.png
+KNN_confusion_matrix_Consciousness and altered states.png
+KNN_confusion_matrix_Cosmology.png
+KNN_confusion_matrix_Cosmopolitanism.png
+KNN_confusion_matrix_Dance and theatre.png
+KNN_confusion_matrix_Death.png
+KNN_confusion_matrix_Deep time.png
+KNN_confusion_matrix_Demography and migration.png
+KNN_confusion_matrix_Design and fashion.png
+KNN_confusion_matrix_Earth science and climate.png
+KNN_confusion_matrix_Ecology and environmental sciences.png
+KNN_confusion_matrix_Economic history.png
+KNN_confusion_matrix_Economics.png
+KNN_confusion_matrix_Education.png
+KNN_confusion_matrix_Engineering.png
+KNN_confusion_matrix_Environmental history.png
+KNN_confusion_matrix_Ethics.png
+KNN_confusion_matrix_Evolution.png
+KNN_confusion_matrix_Fairness and equality.png
+KNN_confusion_matrix_Family life.png
+KNN_confusion_matrix_Film and visual culture.png
+KNN_confusion_matrix_Food and drink.png
+KNN_confusion_matrix_Future of technology.png
+KNN_confusion_matrix_Genetics.png
+KNN_confusion_matrix_Global history.png
+KNN_confusion_matrix_History of ideas.png
+KNN_confusion_matrix_History of science.png
+KNN_confusion_matrix_History of technology.png
+KNN_confusion_matrix_History.png
+KNN_confusion_matrix_Home.png
+KNN_confusion_matrix_Human evolution.png
+KNN_confusion_matrix_Human reproduction.png
+KNN_confusion_matrix_Human rights and justice.png
+KNN_confusion_matrix_Illness and disease.png
+KNN_confusion_matrix_Information and communication.png
+KNN_confusion_matrix_Knowledge.png
+KNN_confusion_matrix_Language and linguistics.png
+KNN_confusion_matrix_Life stages.png
+KNN_confusion_matrix_Logic and probability.png
+KNN_confusion_matrix_Love and friendship.png
+KNN_confusion_matrix_Making.png
+KNN_confusion_matrix_Mathematics.png
+KNN_confusion_matrix_Meaning and the good life.png
+KNN_confusion_matrix_Medicine.png
+KNN_confusion_matrix_Mental health.png
+KNN_confusion_matrix_Metaphysics.png
+KNN_confusion_matrix_Mood and emotion.png
+KNN_confusion_matrix_Music.png
+KNN_confusion_matrix_Nations and empires.png
+KNN_confusion_matrix_Nature and landscape.png
+KNN_confusion_matrix_Neurodiversity.png
+KNN_confusion_matrix_Neuroscience.png
+KNN_confusion_matrix_Oceans and water.png
+KNN_confusion_matrix_Palaeontology.png
+KNN_confusion_matrix_Personality.png
+KNN_confusion_matrix_Philosophy of language.png
+KNN_confusion_matrix_Philosophy of mind.png
+KNN_confusion_matrix_Philosophy of religion.png
+KNN_confusion_matrix_Philosophy of science.png
+KNN_confusion_matrix_Physics.png
+KNN_confusion_matrix_Pleasure and pain.png
+KNN_confusion_matrix_Political philosophy.png
+KNN_confusion_matrix_Politics and government.png
+KNN_confusion_matrix_Poverty and development.png
+KNN_confusion_matrix_Progress and modernity.png
+KNN_confusion_matrix_Psychiatry and psychotherapy.png
+KNN_confusion_matrix_Public health.png
+KNN_confusion_matrix_Quantum theory.png
+KNN_confusion_matrix_Religion.png
+KNN_confusion_matrix_Rituals and celebrations.png
+KNN_confusion_matrix_Self-improvement.png
+KNN_confusion_matrix_Sleep and dreams.png
+KNN_confusion_matrix_Social psychology.png
+KNN_confusion_matrix_Space exploration.png
+KNN_confusion_matrix_Spirituality.png
+KNN_confusion_matrix_Sports and games.png
+KNN_confusion_matrix_Stories and literature.png
+KNN_confusion_matrix_Subcultures.png
+KNN_confusion_matrix_Teaching and learning.png
+KNN_confusion_matrix_Technology and the self.png
+KNN_confusion_matrix_The ancient world.png
+KNN_confusion_matrix_The environment.png
+KNN_confusion_matrix_The future.png
+KNN_confusion_matrix_Thinkers and theories.png
+KNN_confusion_matrix_Travel.png
+KNN_confusion_matrix_Values and beliefs.png
+KNN_confusion_matrix_Virtues and vices.png
+KNN_confusion_matrix_War and peace.png
+KNN_confusion_matrix_Wellbeing.png
+KNN_confusion_matrix_Work.png
+RF_confusion_matrix_Addiction.png
+RF_confusion_matrix_Ageing and death.png
+RF_confusion_matrix_Animals and humans.png
+RF_confusion_matrix_Anthropology.png
+RF_confusion_matrix_Archaeology.png
+RF_confusion_matrix_Architecture.png
+RF_confusion_matrix_Art.png
+RF_confusion_matrix_Astronomy.png
+RF_confusion_matrix_Automation and robotics.png
+RF_confusion_matrix_Beauty and aesthetics.png
+RF_confusion_matrix_Bioethics.png
+RF_confusion_matrix_Biography and memoir.png
+RF_confusion_matrix_Biology.png
+RF_confusion_matrix_Biotechnology.png
+RF_confusion_matrix_Chemistry.png
+RF_confusion_matrix_Childhood and adolescence.png
+RF_confusion_matrix_Cities.png
+RF_confusion_matrix_Cognition and intelligence.png
+RF_confusion_matrix_Comparative philosophy.png
+RF_confusion_matrix_Complexity.png
+RF_confusion_matrix_Computing and artificial intelligence.png
+RF_confusion_matrix_Consciousness and altered states.png
+RF_confusion_matrix_Cosmology.png
+RF_confusion_matrix_Cosmopolitanism.png
+RF_confusion_matrix_Dance and theatre.png
+RF_confusion_matrix_Death.png
+RF_confusion_matrix_Deep time.png
+RF_confusion_matrix_Demography and migration.png
+RF_confusion_matrix_Design and fashion.png
+RF_confusion_matrix_Earth science and climate.png
+RF_confusion_matrix_Ecology and environmental sciences.png
+RF_confusion_matrix_Economic history.png
+RF_confusion_matrix_Economics.png
+RF_confusion_matrix_Education.png
+RF_confusion_matrix_Engineering.png
+RF_confusion_matrix_Environmental history.png
+RF_confusion_matrix_Ethics.png
+RF_confusion_matrix_Evolution.png
+RF_confusion_matrix_Fairness and equality.png
+RF_confusion_matrix_Family life.png
+RF_confusion_matrix_Film and visual culture.png
+RF_confusion_matrix_Food and drink.png
+RF_confusion_matrix_Future of technology.png
+RF_confusion_matrix_Genetics.png
+RF_confusion_matrix_Global history.png
+RF_confusion_matrix_History of ideas.png
+RF_confusion_matrix_History of science.png
+RF_confusion_matrix_History of technology.png
+RF_confusion_matrix_History.png
+RF_confusion_matrix_Home.png
+RF_confusion_matrix_Human evolution.png
+RF_confusion_matrix_Human reproduction.png
+RF_confusion_matrix_Human rights and justice.png
+RF_confusion_matrix_Illness and disease.png
+RF_confusion_matrix_Information and communication.png
+RF_confusion_matrix_Knowledge.png
+RF_confusion_matrix_Language and linguistics.png
+RF_confusion_matrix_Life stages.png
+RF_confusion_matrix_Logic and probability.png
+RF_confusion_matrix_Love and friendship.png
+RF_confusion_matrix_Making.png
+RF_confusion_matrix_Mathematics.png
+RF_confusion_matrix_Meaning and the good life.png
+RF_confusion_matrix_Medicine.png
+RF_confusion_matrix_Mental health.png
+RF_confusion_matrix_Metaphysics.png
+RF_confusion_matrix_Mood and emotion.png
+RF_confusion_matrix_Music.png
+RF_confusion_matrix_Nations and empires.png
+RF_confusion_matrix_Nature and landscape.png
+RF_confusion_matrix_Neurodiversity.png
+RF_confusion_matrix_Neuroscience.png
+RF_confusion_matrix_Oceans and water.png
+RF_confusion_matrix_Palaeontology.png
+RF_confusion_matrix_Personality.png
+RF_confusion_matrix_Philosophy of language.png
+RF_confusion_matrix_Philosophy of mind.png
+RF_confusion_matrix_Philosophy of religion.png
+RF_confusion_matrix_Philosophy of science.png
+RF_confusion_matrix_Physics.png
+RF_confusion_matrix_Pleasure and pain.png
+RF_confusion_matrix_Political philosophy.png
+RF_confusion_matrix_Politics and government.png
+RF_confusion_matrix_Poverty and development.png
+RF_confusion_matrix_Progress and modernity.png
+RF_confusion_matrix_Psychiatry and psychotherapy.png
+RF_confusion_matrix_Public health.png
+RF_confusion_matrix_Quantum theory.png
+RF_confusion_matrix_Religion.png
+RF_confusion_matrix_Rituals and celebrations.png
+RF_confusion_matrix_Self-improvement.png
+RF_confusion_matrix_Sleep and dreams.png
+RF_confusion_matrix_Social psychology.png
+RF_confusion_matrix_Space exploration.png
+RF_confusion_matrix_Spirituality.png
+RF_confusion_matrix_Sports and games.png
+RF_confusion_matrix_Stories and literature.png
+RF_confusion_matrix_Subcultures.png
+RF_confusion_matrix_Teaching and learning.png
+RF_confusion_matrix_Technology and the self.png
+RF_confusion_matrix_The ancient world.png
+RF_confusion_matrix_The environment.png
+RF_confusion_matrix_The future.png
+RF_confusion_matrix_Thinkers and theories.png
+RF_confusion_matrix_Travel.png
+RF_confusion_matrix_Values and beliefs.png
+RF_confusion_matrix_Virtues and vices.png
+RF_confusion_matrix_War and peace.png
+RF_confusion_matrix_Wellbeing.png
+RF_confusion_matrix_Work.png
+model_accuracy_comparison.png

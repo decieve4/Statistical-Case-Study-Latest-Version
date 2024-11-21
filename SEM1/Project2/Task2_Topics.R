@@ -3,12 +3,18 @@ source("SEM1/Project2/stylometryfunctions.R")
 library(class)
 library(randomForest)
 library(caret)
+library(ggplot2)
+library(pheatmap)
+library(reshape2) # 用于数据转换
 
 set.seed(42)
 
 # 1. 获取主题名称列表
 topics <- list.files("SEM1/Project2/functionwords/functionwords/humanfunctionwords/")
 num_topics <- length(topics)
+
+# 用于存储每个 topic 的模型准确率
+results_list <- list()
 
 # 2. 按主题循环进行分类分析
 for (current_topic in 1:num_topics) {
@@ -59,7 +65,6 @@ for (current_topic in 1:num_topics) {
     cv_testdata <- dataset.mat[i, , drop = FALSE]
     cv_traindata <- dataset.mat[-i, , drop = FALSE]
     train_labels <- labels[-i]
-    test_label <- labels[i]
     
     # 判别分析
     tryCatch({
@@ -98,17 +103,71 @@ for (current_topic in 1:num_topics) {
   RFpredictions <- factor(RFpredictions, levels = c(1, 2))
   
   # 3.1 计算准确率
-  message(sprintf("主题 %s 判别分析 (DA) 准确率: %.2f", topic_name, sum(DApredictions == truth, na.rm = TRUE) / length(na.omit(DApredictions))))
-  message(sprintf("主题 %s KNN 准确率: %.2f", topic_name, sum(KNNpredictions == truth, na.rm = TRUE) / length(na.omit(KNNpredictions))))
-  message(sprintf("主题 %s 随机森林 (RF) 准确率: %.2f", topic_name, sum(RFpredictions == truth, na.rm = TRUE) / length(na.omit(RFpredictions))))
+  DA_accuracy <- sum(DApredictions == truth, na.rm = TRUE) / length(na.omit(DApredictions))
+  KNN_accuracy <- sum(KNNpredictions == truth, na.rm = TRUE) / length(na.omit(KNNpredictions))
+  RF_accuracy <- sum(RFpredictions == truth, na.rm = TRUE) / length(na.omit(RFpredictions))
+  
+  # 保存当前主题的准确率结果
+  results_list[[current_topic]] <- data.frame(
+    topic = topic_name,
+    DA_accuracy = DA_accuracy,
+    KNN_accuracy = KNN_accuracy,
+    RF_accuracy = RF_accuracy
+  )
   
   # 3.2 打印混淆矩阵
   message(sprintf("主题 %s 判别分析混淆矩阵:", topic_name))
-  print(confusionMatrix(DApredictions, truth))
+  confusionMatrix_DA <- confusionMatrix(DApredictions, truth)
+  print(confusionMatrix_DA)
   
   message(sprintf("主题 %s KNN 混淆矩阵:", topic_name))
-  print(confusionMatrix(KNNpredictions, truth))
+  confusionMatrix_KNN <- confusionMatrix(KNNpredictions, truth)
+  print(confusionMatrix_KNN)
   
   message(sprintf("主题 %s 随机森林混淆矩阵:", topic_name))
-  print(confusionMatrix(RFpredictions, truth))
+  confusionMatrix_RF <- confusionMatrix(RFpredictions, truth)
+  print(confusionMatrix_RF)
+  
+  # 3.3 可视化混淆矩阵热力图并保存
+  pheatmap(as.matrix(confusionMatrix_DA$table),
+           main = sprintf("判别分析 (DA) 混淆矩阵 - %s", topic_name),
+           color = colorRampPalette(c("white", "blue"))(50),
+           filename = sprintf("DA_confusion_matrix_%s.png", topic_name))
+  
+  pheatmap(as.matrix(confusionMatrix_KNN$table),
+           main = sprintf("KNN 混淆矩阵 - %s", topic_name),
+           color = colorRampPalette(c("white", "green"))(50),
+           filename = sprintf("KNN_confusion_matrix_%s.png", topic_name))
+  
+  pheatmap(as.matrix(confusionMatrix_RF$table),
+           main = sprintf("随机森林 (RF) 混淆矩阵 - %s", topic_name),
+           color = colorRampPalette(c("white", "red"))(50),
+           filename = sprintf("RF_confusion_matrix_%s.png", topic_name))
 }
+
+# 4. 汇总所有主题的准确率并可视化
+# 将结果合并为一个数据框
+results_df <- do.call(rbind, results_list)
+
+# 将数据转化为长格式，便于 ggplot2 处理
+results_long <- reshape2::melt(results_df, id.vars = "topic", variable.name = "model", value.name = "accuracy")
+
+# 绘制柱状图，比较每个 topic 的三种模型的准确率
+accuracy_plot <- ggplot(results_long, aes(x = topic, y = accuracy, fill = model)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  theme_minimal() +
+  labs(title = "每个主题下不同模型的准确率比较", x = "主题", y = "准确率", fill = "模型类型") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+# 显示柱状图
+print(accuracy_plot)
+
+# 保存柱状图
+ggsave("model_accuracy_comparison.png", plot = accuracy_plot)
+
+# 5. 打印总结表
+message("\n总结表: 每个主题的模型准确率\n")
+print(results_df)
+
+# 6. 保存总结表为 CSV 文件
+write.csv(results_df, file = "summary_accuracy_results.csv", row.names = FALSE)
