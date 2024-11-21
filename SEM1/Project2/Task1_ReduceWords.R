@@ -144,16 +144,15 @@ library(ggplot2)
 data <- data.frame(
   x = c(0,50,200,500,1000,0,50,200,500,1000,0,50,200,500,1000),
   y = c(0.9669, 0.8216, 0.9261, 0.957, 0.9646, 0.658, 0.5211, 0.5823, 0.6, 0.6012, 0.9995, 0.4999, 0.5084, 0.702, 0.8937),  # Y轴数据
-  group = rep(c("Discriminant Analysis", "KNN", "Random Forest"), each = 5)  # 分组标签
+  group = rep(c("Discriminant Analysis", "KNN", "Random Forest"), each = 5)
 )
 custom_ticks <- c(0, 50, 200, 500, 1000)
-# 绘制多条折线并添加注释
 ggplot(data, aes(x = x, y = y, color = group, group = group)) +
-  geom_line(size = 1) +                  # 绘制折线
-  geom_point(size = 2) +                 # 添加数据点
+  geom_line(size = 1) +
+  geom_point(size = 2) +
   labs(title = "Reducewords", x = "Numwords", y = "Accuracy", color = "") +
   scale_x_continuous(breaks = custom_ticks) +
-  theme_minimal() +                      # 美化主题
-  theme(legend.position = "top")         # 将图例放在顶部
+  theme_minimal() + 
+  theme(legend.position = "top")
 
 
