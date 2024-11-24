@@ -10,7 +10,7 @@ humanfeatures <- humanM$features
 GPTfeatures <- GPTM$features
 rhfeatures<-humanM$features[[1]]
 rgfeatures<-GPTM$features[[1]]
-numwords <- 1000 #number of words to trim the test set down into
+numwords <- 50 #number of words to trim the test set down into
 for(i in 2:length(humanM$features)){
   rhfeatures<-rbind(rhfeatures,humanM$features[[i]])
   rgfeatures<-rbind(rgfeatures,GPTM$features[[i]])
@@ -32,7 +32,7 @@ GPTfeatures.mat <- do.call(rbind, GPTfeatures)
 # 1.4 combine human and GPT to be a list with index 1 (human) and 2 (GPT)
 features <- list(humanfeatures.mat, GPTfeatures.mat)
 
-
+start_time <- proc.time()
 
 traindata <- features
 reducedtraindata<-reducedfeatures
@@ -117,7 +117,9 @@ truth <- factor(truth, levels = sort(unique(truth)))
 DApredictions <- factor(DApredictions, levels = levels(truth))
 KNNpredictions <- factor(KNNpredictions, levels = levels(truth))
 RFpredictions <- factor(RFpredictions, levels = levels(truth))
-
+end_time <- proc.time()
+message("Run Time:")
+print(end_time - start_time)
 # 3.2 sum bool factor
 
 message("Discriminant Analysis (DA) Accuracy: ", sum(DApredictions==truth)/length(truth))
@@ -137,50 +139,14 @@ print(confusionMatrix(RFpredictions, truth))
 
 
 
-# 加载ggplot2库
 library(ggplot2)
 
-# 创建数据
-data <- data.frame(
-  x = c(0,50,200,500,1000,0,50,200,500,1000,0,50,200,500,1000),
-  y = c(0.9669, 0.8216, 0.9261, 0.957, 0.9646, 0.658, 0.5211, 0.5823, 0.6, 0.6012, 0.9995, 0.4999, 0.5084, 0.702, 0.8937),  # Y轴数据
-  group = rep(c("Discriminant Analysis", "KNN", "Random Forest"), each = 5)
-)
-custom_ticks <- c(0, 50, 200, 500, 1000)
-ggplot(data, aes(x = x, y = y, color = group, group = group)) +
-  geom_line(size = 1) +
-  geom_point(size = 2) +
-  labs(title = "Reducewords", x = "Numwords", y = "Accuracy", color = "") +
-  scale_x_continuous(breaks = custom_ticks) +
-  theme_minimal() + 
-  theme(legend.position = "top")
-
-
 data <- data.frame(
   x = c(0, 50, 200, 500, 1000, 0, 50, 200, 500, 1000, 0, 50, 200, 500, 1000),
   y = c(0.9669, 0.8216, 0.9261, 0.957, 0.9646, 0.658, 0.5211, 0.5823, 0.6, 0.6012, 0.9995, 0.4999, 0.5084, 0.702, 0.8937),
   group = rep(c("Discriminant Analysis", "KNN", "Random Forest"), each = 5)
 )
 
-# 自定义的x轴标签
-custom_labels <- c("BaseLine", "Fifty", "Two Hundred", "Five Hundred", "Thousand")
-
-ggplot(data, aes(x = x, y = y, color = group, group = group)) +
-  geom_line(size = 1) +
-  geom_point(size = 2) +
-  labs(title = "Accuracies of Reduce Words", x = "Numwords", y = "Accuracy", color = "") +
-  scale_x_continuous(breaks = c(0, 50, 200, 500, 1000), labels = custom_labels) +
-  theme_minimal() +
-  theme(legend.position = "top")
-
-
-data <- data.frame(
-  x = c(0, 50, 200, 500, 1000, 0, 50, 200, 500, 1000, 0, 50, 200, 500, 1000),
-  y = c(0.9669, 0.8216, 0.9261, 0.957, 0.9646, 0.658, 0.5211, 0.5823, 0.6, 0.6012, 0.9995, 0.4999, 0.5084, 0.702, 0.8937),
-  group = rep(c("Discriminant Analysis", "KNN", "Random Forest"), each = 5)
-)
-
-# 转换 x 为离散变量
 data$x <- factor(data$x, levels = c(0, 50, 200, 500, 1000), 
                  labels = c("Base Line", "Fifty", "Two Hundred", "Five Hundred", "Thousand"))
 
@@ -190,5 +156,23 @@ ggplot(data, aes(x = x, y = y, color = group, group = group)) +
   labs(title = "Accuracies of Reduce Words", x = "Numwords", y = "Accuracy", color = "") +
   theme_minimal() +
   theme(legend.position = "top")
+
+
+
+# 给定的5个数据点
+x <- c(1, 2, 3, 4, 5)  # 原始索引，代表5个点（用于等间距）
+y <- c(27, 22.40, 21.58, 22.51, 23.59)  # y轴值
+
+# 自定义的x轴标签
+custom_labels <- c("Zero", "Fifty", "Two Hundred", "Five Hundred", "Thousand")
+
+# 绘制图表
+plot(x, y, type = "o", pch = 16, col = "blue",
+     xlab = "Numwords", ylab = "Time",
+     main = "Time Consumption",
+     xaxt = "n")  # 关闭默认的x轴刻度
+
+axis(1, at = x, labels = custom_labels)
+
 
 
