@@ -156,3 +156,39 @@ ggplot(data, aes(x = x, y = y, color = group, group = group)) +
   theme(legend.position = "top")
 
 
+data <- data.frame(
+  x = c(0, 50, 200, 500, 1000, 0, 50, 200, 500, 1000, 0, 50, 200, 500, 1000),
+  y = c(0.9669, 0.8216, 0.9261, 0.957, 0.9646, 0.658, 0.5211, 0.5823, 0.6, 0.6012, 0.9995, 0.4999, 0.5084, 0.702, 0.8937),
+  group = rep(c("Discriminant Analysis", "KNN", "Random Forest"), each = 5)
+)
+
+# 自定义的x轴标签
+custom_labels <- c("BaseLine", "Fifty", "Two Hundred", "Five Hundred", "Thousand")
+
+ggplot(data, aes(x = x, y = y, color = group, group = group)) +
+  geom_line(size = 1) +
+  geom_point(size = 2) +
+  labs(title = "Accuracies of Reduce Words", x = "Numwords", y = "Accuracy", color = "") +
+  scale_x_continuous(breaks = c(0, 50, 200, 500, 1000), labels = custom_labels) +
+  theme_minimal() +
+  theme(legend.position = "top")
+
+
+data <- data.frame(
+  x = c(0, 50, 200, 500, 1000, 0, 50, 200, 500, 1000, 0, 50, 200, 500, 1000),
+  y = c(0.9669, 0.8216, 0.9261, 0.957, 0.9646, 0.658, 0.5211, 0.5823, 0.6, 0.6012, 0.9995, 0.4999, 0.5084, 0.702, 0.8937),
+  group = rep(c("Discriminant Analysis", "KNN", "Random Forest"), each = 5)
+)
+
+# 转换 x 为离散变量
+data$x <- factor(data$x, levels = c(0, 50, 200, 500, 1000), 
+                 labels = c("Base Line", "Fifty", "Two Hundred", "Five Hundred", "Thousand"))
+
+ggplot(data, aes(x = x, y = y, color = group, group = group)) +
+  geom_line(size = 1) +
+  geom_point(size = 2) +
+  labs(title = "Accuracies of Reduce Words", x = "Numwords", y = "Accuracy", color = "") +
+  theme_minimal() +
+  theme(legend.position = "top")
+
+
