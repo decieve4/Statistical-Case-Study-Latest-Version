@@ -1,0 +1,4 @@
+"model","accuracy_diff"
+"DA_accuracy",-0.397331773226281
+"KNN_accuracy",-0.0779301769814167
+"RF_accuracy",-0.419414073118136

@@ -171,3 +171,9 @@ print(results_df)
 
 # 6. 保存总结表为 CSV 文件
 write.csv(results_df, file = "summary_accuracy_results.csv", row.names = FALSE)
+
+ggplot(results_long, aes(x = topic, y = accuracy, fill = model)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  theme_minimal() +
+  labs(title = "每个主题下不同模型的准确率比较", x = "主题", y = "准确率", fill = "模型类型") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))

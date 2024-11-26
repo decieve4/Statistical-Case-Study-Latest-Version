@@ -145,3 +145,12 @@ print(confusionMatrix(KNNpredictions, truth))
 
 message("Confusion Matrix for Random Forest:")
 print(confusionMatrix(RFpredictions, truth))
+
+baseline_results <- data.frame(
+  topic = "Overall_Baseline",
+  DA_accuracy = sum(DApredictions == truth) / length(truth),
+  KNN_accuracy = sum(KNNpredictions == truth) / length(truth),
+  RF_accuracy = sum(RFpredictions == truth) / length(truth)
+)
+
+write.csv(baseline_results, file = "baseline_accuracy_results.csv", row.names = FALSE)
