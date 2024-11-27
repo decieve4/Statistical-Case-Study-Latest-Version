@@ -157,22 +157,24 @@ ggplot(data, aes(x = x, y = y, color = group, group = group)) +
   theme_minimal() +
   theme(legend.position = "top")
 
+library(ggplot2)
 
+data <- data.frame(
+  x = c(0, 50, 200, 500, 1000, 0, 50, 200, 500, 1000, 0, 50, 200, 500, 1000),
+  y = c(0.21, 0.24, 0.21, 0.25, 0.22, 0.08, 0.08, 0.07, 0.08, 0.11, 26.06, 22.95, 23.02, 22.99, 22.29),
+  group = rep(c("Discriminant Analysis", "KNN", "Random Forest"), each = 5)
+)
 
-# 给定的5个数据点
-x <- c(1, 2, 3, 4, 5)  # 原始索引，代表5个点（用于等间距）
-y <- c(27, 22.40, 21.58, 22.51, 23.59)  # y轴值
+data$x <- factor(data$x, levels = c(0, 50, 200, 500, 1000), 
+                 labels = c("Base Line", "Fifty", "Two Hundred", "Five Hundred", "Thousand"))
 
-# 自定义的x轴标签
-custom_labels <- c("Zero", "Fifty", "Two Hundred", "Five Hundred", "Thousand")
+ggplot(data, aes(x = x, y = y, color = group, group = group)) +
+  geom_line(size = 1) +
+  geom_point(size = 2) +
+  labs(title = "Time Consumption of Reduce Words", x = "Numwords", y = "Time", color = "") +
+  theme_minimal() +
+  theme(legend.position = "top")
 
-# 绘制图表
-plot(x, y, type = "o", pch = 16, col = "blue",
-     xlab = "Numwords", ylab = "Time",
-     main = "Time Consumption",
-     xaxt = "n")  # 关闭默认的x轴刻度
-
-axis(1, at = x, labels = custom_labels)
 
 
 
