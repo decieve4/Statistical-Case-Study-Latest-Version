@@ -10,7 +10,7 @@ humanfeatures <- humanM$features
 GPTfeatures <- GPTM$features
 rhfeatures<-humanM$features[[1]]
 rgfeatures<-GPTM$features[[1]]
-numwords <- 50 #number of words to trim the test set down into
+numwords <- 2000 #number of words to trim the test set down into
 for(i in 2:length(humanM$features)){
   rhfeatures<-rbind(rhfeatures,humanM$features[[i]])
   rgfeatures<-rbind(rgfeatures,GPTM$features[[i]])
@@ -142,12 +142,12 @@ print(confusionMatrix(RFpredictions, truth))
 library(ggplot2)
 
 data <- data.frame(
-  x = c(0, 50, 200, 500, 1000, 0, 50, 200, 500, 1000, 0, 50, 200, 500, 1000),
+  x = c(0, 50, 200, 500, 1000, 2000, 0, 50, 200, 500, 1000, 2000, 0, 50, 200, 500, 1000,2000),
   y = c(0.9669, 0.8216, 0.9261, 0.957, 0.9646, 0.658, 0.5211, 0.5823, 0.6, 0.6012, 0.9995, 0.4999, 0.5084, 0.702, 0.8937),
   group = rep(c("Discriminant Analysis", "KNN", "Random Forest"), each = 5)
 )
 
-data$x <- factor(data$x, levels = c(0, 50, 200, 500, 1000), 
+data$x <- factor(data$x, levels = c(0, 50, 200, 500, 1000,2000), 
                  labels = c("Base Line", "Fifty", "Two Hundred", "Five Hundred", "Thousand"))
 
 ggplot(data, aes(x = x, y = y, color = group, group = group)) +
@@ -160,7 +160,7 @@ ggplot(data, aes(x = x, y = y, color = group, group = group)) +
 library(ggplot2)
 
 data <- data.frame(
-  x = c(0, 50, 200, 500, 1000, 0, 50, 200, 500, 1000, 0, 50, 200, 500, 1000),
+  x = c(0, 50, 200, 500, 1000, 2000, 0, 50, 200, 500, 1000, 2000, 0, 50, 200, 500, 1000,2000),
   y = c(0.21, 0.24, 0.21, 0.25, 0.22, 0.08, 0.08, 0.07, 0.08, 0.11, 26.06, 22.95, 23.02, 22.99, 22.29),
   group = rep(c("Discriminant Analysis", "KNN", "Random Forest"), each = 5)
 )
