@@ -1,3 +1,5 @@
+library(ggplot2)
+library(tidyr)
 # 创建数据框
 data1 <- data.frame(
   topic = c("Baseline"),                     # 主题列
@@ -58,13 +60,21 @@ fig <- ggplot(Result_long, aes(x = Dataset, y = Accuracy, color = Model, group =
   geom_line() +                # Plot the lines connecting the points for each model
   geom_point() +               # Add points to show the accuracy values
   labs(title = "Accuracy of Different Models Across Different Number of Words",  # Plot title
-       x = "Dateset",  # X-axis label
+       x = "Number of Words",  # X-axis label
        y = "Accuracy") +  # Y-axis label
   scale_color_brewer(palette = "Set2") + 
   geom_hline(data = Baseline_long, 
              aes(yintercept = Accuracy, color = Model), 
              linetype = "dashed") +# Add horizontal dashed lines for Baseline
-  theme_bw()
+  theme_bw() + 
+  theme(
+    text = element_text(size = 14),  # Set global font size
+    axis.title = element_text(size = 16),  # Adjust axis title font size
+    axis.text = element_text(size = 12),  # Adjust axis tick labels font size
+    legend.title = element_text(size = 14),  # Adjust legend title font size
+    legend.text = element_text(size = 12),  # Adjust legend text font size
+    plot.title = element_text(size = 18)  # Adjust plot title font size
+  )
 
 
 ggsave("./SEM1/Project2/Figures/Task1 ReduceWords Lineplot.pdf", width = 8, height = 6)
