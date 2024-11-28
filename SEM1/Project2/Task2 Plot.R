@@ -3,8 +3,8 @@ library(ggplot2)
 library(reshape2)
 
 # Load the data from CSV files
-current_results <- read.csv("~/Desktop/Stat_Case_Study/SEM1/Project2/Figures/summary_accuracy_results.csv")
-baseline_results <- read.csv("~/Desktop/Stat_Case_Study/SEM1/Project2/Figures/baseline_accuracy_results.csv")
+current_results <- read.csv("~/Desktop/Stat_Case_Study/SEM1/Project2/Experiment_Result/Task2_summary_accuracy_results.csv")
+baseline_results <- read.csv("~/Desktop/Stat_Case_Study/SEM1/Project2/Experiment_Result/Baseline_Result.csv")
 
 # 1. 主题分类准确率对比图（Topic-wise Classification Accuracy）
 # Convert current results to long format for ggplot2
@@ -17,13 +17,14 @@ accuracy_plot <- ggplot(current_long, aes(x = reorder(topic, -accuracy), y = acc
        x = "Topic",
        y = "Accuracy",
        fill = "Model Type") +
+  theme_bw() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 # Display the plot
 print(accuracy_plot)
 
 # Save the plot
-ggsave("~/Desktop/Stat_Case_Study/SEM1/Project2/Figures/topic_wise_accuracy_task2.png", plot = accuracy_plot, width = 14, height = 8)
+ggsave("~/Desktop/Stat_Case_Study/SEM1/Project2/Figures/Task2_topic_wise_accuracy_task2.pdf", plot = accuracy_plot, width = 14, height = 8)
 
 # 2. 整体准确率对比图（Overall Classification Accuracy Comparison）
 # Calculate overall accuracy for each model in Task 2
@@ -41,6 +42,9 @@ overall_baseline <- data.frame(
 # Combine baseline and current results for comparison
 comparison_overall <- merge(overall_current, overall_baseline, by = "model", suffixes = c("_task2", "_baseline"))
 
+# Save Task 2 overall accuracy to CSV
+write.csv(overall_current, "~/Desktop/Stat_Case_Study/SEM1/Project2/Experiment_Result/Task2_overall_accuracy.csv", row.names = FALSE)
+
 # Convert data to long format for ggplot2
 comparison_long <- melt(comparison_overall, id.vars = "model", variable.name = "experiment", value.name = "accuracy")
 
@@ -50,10 +54,11 @@ overall_accuracy_plot <- ggplot(comparison_long, aes(x = model, y = accuracy, fi
   labs(title = "Overall Classification Accuracy Comparison: Baseline vs Task 2",
        x = "Model Type",
        y = "Accuracy",
-       fill = "Experiment")
+       fill = "Experiment") +
+  theme_bw()
 
 # Display the plot
 print(overall_accuracy_plot)
 
 # Save the plot
-ggsave("~/Desktop/Stat_Case_Study/SEM1/Project2/Figures/overall_accuracy_comparison.png", plot = overall_accuracy_plot, width = 10, height = 6)
+ggsave("~/Desktop/Stat_Case_Study/SEM1/Project2/Figures/Task2_overall_accuracy_comparison.pdf", plot = overall_accuracy_plot, width = 10, height = 6)
