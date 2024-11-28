@@ -43,7 +43,15 @@ data5 <- data.frame(
   RF_accuracy = c(0.8937)                 # Random Forest 精度
 )
 write.csv(data5, "output.csv", row.names = FALSE)
-Final_Result <- rbind(data1,data2,data3,data4,data5)
+# 创建数据框
+data6 <- data.frame(
+  topic = c(2000),                     # 主题列
+  DA_accuracy = c(0.9659),                # Discriminant Analysis 精度
+  KNN_accuracy = c(0.6366),               # KNN 精度
+  RF_accuracy = c(0.9834)                 # Random Forest 精度
+)
+write.csv(data6, "output.csv", row.names = FALSE)
+Final_Result <- rbind(data1,data2,data3,data4,data5,data6)
 
 colnames(Final_Result) <- c("Dataset", "DA", "KNN", "RF")
 Final_Result$Dataset <- factor(Final_Result$Dataset)
