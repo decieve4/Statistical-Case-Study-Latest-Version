@@ -31,8 +31,7 @@ Result_long <- Result_long[-c(1, 2, 3), ]
 fig <- ggplot(Result_long, aes(x = Dataset, y = Accuracy, color = Model, group = Model)) +
   geom_line(linewidth = 1.5) +                # Plot the lines connecting the points for each model
   geom_point(size = 4) +               # Add points to show the accuracy values
-  labs(title = "Accuracy of Different Models Across Different Dimension",  # Plot title
-       x = "Dateset",  # X-axis label
+  labs(x = "Dateset",  # X-axis label
        y = "Accuracy") +  # Y-axis label
   scale_color_brewer(palette = "Set2") + 
   geom_hline(data = Baseline_long, 

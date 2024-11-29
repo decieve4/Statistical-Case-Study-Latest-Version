@@ -6,7 +6,7 @@ Task3_Result <- read.csv("./SEM1/Project2/Experiment_Result/Task3_results.csv", 
 colnames(Task3_Result) <- c("topic_name", "DA", "KNN", "RF") # for pivot long
 
 # Load Baseline Result
-Task0_Result <- read.csv("./SEM1/Project2/Figures/baseline_accuracy_results.csv", header = TRUE, sep = ",", stringsAsFactors = FALSE)
+Task0_Result <- read.csv("./SEM1/Project2/Experiment_Result/Baseline_Result.csv", header = TRUE, sep = ",", stringsAsFactors = FALSE)
 colnames(Task0_Result) <- c("topic_name", "DA", "KNN", "RF") # for pivot long
 
 # long format for ggplot
@@ -28,7 +28,6 @@ fig <- ggplot(data = Task3_long_results, aes(x = Model, y = Accuracy, fill = Mod
              aes(yintercept = Accuracy, color = Model),
              linetype = "dashed", linewidth = 1) +   # Add horizontal dashed lines for Baseline
   scale_color_brewer(palette = "Set2") + 
-  labs(title = "Model Accuracy Comparison Boxplot") + 
   theme_bw() +
   theme(
     text = element_text(size = 14),  # Set global font size

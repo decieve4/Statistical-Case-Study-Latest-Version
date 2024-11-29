@@ -65,15 +65,14 @@ Baseline_long <- Result_long[1:3, ]
 Result_long <- Result_long[-c(1, 2, 3), ]
 
 fig <- ggplot(Result_long, aes(x = Dataset, y = Accuracy, color = Model, group = Model)) +
-  geom_line() +                # Plot the lines connecting the points for each model
-  geom_point() +               # Add points to show the accuracy values
-  labs(title = "Accuracy of Different Models Across Different Number of Words",  # Plot title
-       x = "Number of Words",  # X-axis label
+  geom_line(linewidth = 1.5) +                # Plot the lines connecting the points for each model
+  geom_point(size = 4) +               # Add points to show the accuracy values
+  labs(x = "Number of Words",  # X-axis label
        y = "Accuracy") +  # Y-axis label
   scale_color_brewer(palette = "Set2") + 
   geom_hline(data = Baseline_long, 
              aes(yintercept = Accuracy, color = Model), 
-             linetype = "dashed") +# Add horizontal dashed lines for Baseline
+             linetype = "dashed", linewidth = 1) +# Add horizontal dashed lines for Baseline
   theme_bw() + 
   theme(
     text = element_text(size = 14),  # Set global font size

@@ -155,9 +155,8 @@ accuracy_plot <- ggplot(results_long, aes(x = Model, y = Accuracy, fill = Model)
   geom_jitter(width = 0.2, alpha = 0.5) +  # 保持图二的点抖动参数
   geom_hline(data = baseline_long, aes(yintercept = Accuracy, color = Model), linetype = "dashed", size = 1) +  # 保留基准线
   scale_fill_brewer(palette = "Set2") +  # 保持与基准线一致的颜色
-  scale_color_brewer(palette = "Set2") + 
-  labs(title = "Accuracy Distribution of Different Models for Each Topic") + 
-  theme_bw(base_size = 14) +  # 使用 theme_bw() 样式，带有白色背景和网格线
+  scale_color_brewer(palette = "Set2") +
+  theme_bw() +  # 使用 theme_bw() 样式，带有白色背景和网格线
   theme(
     text = element_text(size = 14),
     axis.title = element_text(size = 16),
@@ -167,7 +166,6 @@ accuracy_plot <- ggplot(results_long, aes(x = Model, y = Accuracy, fill = Model)
     plot.title = element_text(size = 18, hjust = 0.5, face = "bold")  # 标题居中和加粗
   )
 
-
 # Display violin plot
 print(accuracy_plot)
 
@@ -175,8 +173,7 @@ print(accuracy_plot)
 ggsave("./SEM1/Project2/Figures/Task2_accuracy_distribution_modified.pdf", 
        plot = accuracy_plot, 
        width = 8, 
-       height = 6,
-       bg = "white")
+       height = 6)
 
 # Create a dataframe to store the overall runtime for each model
 runtime_summary <- data.frame(
