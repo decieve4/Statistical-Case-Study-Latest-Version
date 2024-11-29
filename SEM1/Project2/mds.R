@@ -78,16 +78,14 @@ data <- data.frame(
 )
 
 # 绘图
-ggplot(data, aes(x = x, y = y, color = group)) +  # 按分组设置颜色
-  geom_point(size = 2) +                         # 绘制点，调整点大小
+p = ggplot(data, aes(x = x, y = y, color = group)) +  # 按分组设置颜色
+  geom_point(size = 3) +                         # 绘制点，调整点大小
   labs(
-    title = "Multidimensional Scaling Plot of All Essays Based on Topic", # 标题
     x = "Dimension 1",                                       # x轴标签
     y = "Dimension 2",                                       # y轴标签
     color = "Author"                                         # 图例标题
   ) +
-  scale_color_manual(values = c("Human" = "blue", "ChatGPT" = "red")) + # 手动指定颜色
-  labs(title = "Multidimensional Scaling Plot of All Essays Based on Topic") + 
+  labs() + 
   theme_bw() + 
   theme(
     text = element_text(size = 14),  # Set global font size
@@ -99,4 +97,4 @@ ggplot(data, aes(x = x, y = y, color = group)) +  # 按分组设置颜色
   )+
   scale_color_brewer(palette = "Set2") # 使用简洁主题
 
-
+ggsave("./SEM1/Project2/Figures/MDSplot.pdf", plot = p, width = 8, height = 6)

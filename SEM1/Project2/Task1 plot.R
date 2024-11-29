@@ -55,7 +55,7 @@ Final_Result <- rbind(data1,data2,data3,data4,data5,data6)
 
 colnames(Final_Result) <- c("Dataset", "DA", "KNN", "RF")
 
-Final_Result$Dataset <- factor(Final_Result$Dataset, levels = c("Baseline", "50", "200", "500", "1000", "2000"))
+Final_Result$Dataset <- factor(Final_Result$Dataset, levels = c("Baseline", "2000", "1000", "500", "200", "50"))
 
 Result_long <- pivot_longer(Final_Result, 
                             cols = colnames(Final_Result)[-1], 
@@ -83,6 +83,5 @@ fig <- ggplot(Result_long, aes(x = Dataset, y = Accuracy, color = Model, group =
     legend.text = element_text(size = 12),  # Adjust legend text font size
     plot.title = element_text(size = 18)  # Adjust plot title font size
   )
-
 
 ggsave("./SEM1/Project2/Figures/Task1 ReduceWords Lineplot.pdf", width = 8, height = 6)
