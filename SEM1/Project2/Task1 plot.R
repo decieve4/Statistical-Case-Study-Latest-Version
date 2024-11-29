@@ -54,7 +54,8 @@ write.csv(data6, "output.csv", row.names = FALSE)
 Final_Result <- rbind(data1,data2,data3,data4,data5,data6)
 
 colnames(Final_Result) <- c("Dataset", "DA", "KNN", "RF")
-Final_Result$Dataset <- factor(Final_Result$Dataset)
+
+Final_Result$Dataset <- factor(Final_Result$Dataset, levels = c("Baseline", "50", "200", "500", "1000", "2000"))
 
 Result_long <- pivot_longer(Final_Result, 
                             cols = colnames(Final_Result)[-1], 
