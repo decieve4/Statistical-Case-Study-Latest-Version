@@ -1,0 +1,4 @@
+"model","accuracy"
+"DA_accuracy",0.965748057010878
+"KNN_accuracy",0.987857017038446
+"RF_accuracy",0.994449200097148
